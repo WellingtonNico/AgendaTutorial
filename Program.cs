@@ -143,20 +143,39 @@ class Program
         ImprimirContatos(contatos);
     }
 
+    private static string ObterInputComValorPadrao(string mensagem, string valorPadrao)
+    {
+        Console.WriteLine(mensagem);
+        var input = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return valorPadrao;
+        }
+        return input;
+    }
+
     private static Contato ObterContatoDoInput(Contato? contato)
     {
+        var sufixo = "";
         if (contato == null)
         {
             contato = new Contato();
         }
+        else
+        {
+            sufixo = "(Deixe vazio para manter os dados atuais)";
+        }
         do
         {
-            Console.WriteLine("\nInforme o novo nome:");
-            contato.Nome = Console.ReadLine() ?? "";
-            Console.WriteLine("\nInforme o novo DDD:");
-            contato.DDD = Console.ReadLine() ?? "";
-            Console.WriteLine("\nInforme o novo número:");
-            contato.Numero = Console.ReadLine() ?? "";
+            contato.Nome = ObterInputComValorPadrao(
+                $"\nInforme o novo nome{sufixo}:",
+                contato.Nome
+            );
+            contato.DDD = ObterInputComValorPadrao($"\nInforme o novo DDD{sufixo}:", contato.DDD);
+            contato.Numero = ObterInputComValorPadrao(
+                $"\nInforme o novo número{sufixo}:",
+                contato.Numero
+            );
 
             var erros = ContatoService.ValidarContato(contato);
 
