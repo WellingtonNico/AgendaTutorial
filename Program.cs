@@ -33,7 +33,7 @@ class Program
         Console.WriteLine("\n\nMenu:");
         foreach (var opcao in opcoes)
         {
-            Console.WriteLine($"{opcao.Key} - {opcao.Value}");
+            ImprimirTextoAzul($"{opcao.Key} - {opcao.Value}");
         }
         Console.WriteLine("\nInforme sua intenção:");
         var input = Console.ReadLine() ?? "";
@@ -229,6 +229,13 @@ class Program
     public static void ImprimirTextoAmarelo(string texto)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(texto);
+        Console.ResetColor();
+    }
+
+    public static void ImprimirTextoAzul(string texto)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine(texto);
         Console.ResetColor();
     }
