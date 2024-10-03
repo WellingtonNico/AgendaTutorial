@@ -68,7 +68,7 @@ class ContatoService
         return contatos;
     }
 
-    public static void SalvarContatos(List<Contato> contatos)
+    public void SalvarContatos(List<Contato> contatos)
     {
         using var writer = new StreamWriter(DatabaseDir);
         foreach (var c in contatos)
