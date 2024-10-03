@@ -74,13 +74,20 @@ class Program
 
     private static void ImprimirContatos(List<Contato> contatos)
     {
-        var formato = "| {0,-3} | {1,-30} | {2,-3} | {3,-9} |";
+        var formato = "| {0,-3} | {1,-30} | {2,-3} | {3,-9} | {4,-40} |";
         Console.WriteLine($"\nListando {contatos.Count} contatos...");
-        Console.WriteLine(formato, "ID", "Nome", "DDD", "Número");
-        Console.WriteLine(new string('-', 58));
+        Console.WriteLine(formato, "ID", "Nome", "DDD", "Número", "Email");
+        Console.WriteLine(new string('-', 101));
         foreach (var contato in contatos)
         {
-            Console.WriteLine(formato, contato.Id, contato.Nome, contato.DDD, contato.Numero);
+            Console.WriteLine(
+                formato,
+                contato.Id,
+                contato.Nome,
+                contato.DDD,
+                contato.Numero,
+                contato.Email
+            );
         }
     }
 
@@ -123,7 +130,8 @@ class Program
         Console.WriteLine($"ID: {contato.Id}");
         Console.WriteLine($"Nome: {contato.Nome}");
         Console.WriteLine($"DDD: {contato.DDD}");
-        Console.WriteLine($"Numero: {contato.Numero}");
+        Console.WriteLine($"Número: {contato.Numero}");
+        Console.WriteLine($"Email: {contato.Email}");
         return contato;
     }
 
@@ -175,6 +183,10 @@ class Program
             contato.Numero = ObterInputComValorPadrao(
                 $"\nInforme o novo número{sufixo}:",
                 contato.Numero
+            );
+            contato.Email = ObterInputComValorPadrao(
+                $"\nInforme o novo email{sufixo}:",
+                contato.Email
             );
 
             var erros = ContatoService.ValidarContato(contato);
