@@ -86,7 +86,7 @@ class Program
 	{
 		var contato = ObterContatoDoInput(null);
 		ContatoService.SalvarContato(contato);
-		ImprimirTextoVerde($"Contato criado com sucesso: {contato.Nome}");
+		ImprimirTextoVerde($"\nContato criado com sucesso: {contato.Nome}");
 	}
 
 	private static bool IsIdentificadorValido(string identificador, List<Contato> contatos)
