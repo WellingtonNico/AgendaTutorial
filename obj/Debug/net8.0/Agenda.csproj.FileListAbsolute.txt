@@ -1,0 +1,14 @@
+/Users/wellington/projetos/c#/Agenda/bin/Debug/net8.0/Agenda
+/Users/wellington/projetos/c#/Agenda/bin/Debug/net8.0/Agenda.deps.json
+/Users/wellington/projetos/c#/Agenda/bin/Debug/net8.0/Agenda.runtimeconfig.json
+/Users/wellington/projetos/c#/Agenda/bin/Debug/net8.0/Agenda.dll
+/Users/wellington/projetos/c#/Agenda/bin/Debug/net8.0/Agenda.pdb
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.AssemblyInfoInputs.cache
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.AssemblyInfo.cs
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.csproj.CoreCompileInputs.cache
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.dll
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/refint/Agenda.dll
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.pdb
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/Agenda.genruntimeconfig.cache
+/Users/wellington/projetos/c#/Agenda/obj/Debug/net8.0/ref/Agenda.dll
