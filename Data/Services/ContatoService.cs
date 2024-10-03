@@ -8,7 +8,21 @@ class ContatoService
     private static readonly string DatabaseDir = "./Data/database.csv";
     private static readonly string DelimitadorCSV = ";";
 
-    public static Contato SalvarContato(Contato contato)
+    public ContatoService()
+    {
+        ConfigurarBanco();
+    }
+
+    public void ConfigurarBanco()
+    {
+        var bancoDeDados = new FileInfo(DatabaseDir);
+        if (!bancoDeDados.Exists)
+        {
+            bancoDeDados.Create().Close();
+        }
+    }
+
+    public Contato SalvarContato(Contato contato)
     {
         /// ler o arquivo database.csv, verificar se o contato já existe comparando o DDD e o número
         /// se não existir, adicionar o contato
@@ -30,7 +44,7 @@ class ContatoService
         return contato;
     }
 
-    public static List<Contato> ListarContatos()
+    public List<Contato> ListarContatos()
     {
         /// ler o arquivo database.csv
         var contatos = new List<Contato>();
@@ -63,7 +77,7 @@ class ContatoService
             );
     }
 
-    public static List<Contato> FiltrarContatos(string filtro)
+    public List<Contato> FiltrarContatos(string filtro)
     {
         return ListarContatos()
             .Where(c =>
@@ -73,14 +87,14 @@ class ContatoService
             .ToList();
     }
 
-    public static void RemoverContato(Contato contato)
+    public void RemoverContato(Contato contato)
     {
         var contatos = ListarContatos();
         contatos.RemoveAll(c => c.Id == contato.Id);
         SalvarContatos(contatos);
     }
 
-    public static List<ValidationResult> ValidarContato(Contato contato)
+    public List<ValidationResult> ValidarContato(Contato contato)
     {
         var state = new ValidationContext(contato);
         var results = new List<ValidationResult>();
