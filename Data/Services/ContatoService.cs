@@ -9,7 +9,6 @@ namespace Agenda.Data.Services;
 class ContatoService
 {
     private static readonly string DatabaseDir = "./Data/database.csv";
-    private static readonly char DelimitadorCSV = ';';
     private static readonly CsvConfiguration CsvConfig =
         new() { Delimiter = ";", CultureInfo = CultureInfo.InvariantCulture };
 
