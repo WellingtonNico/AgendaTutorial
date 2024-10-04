@@ -1,12 +1,17 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Agenda.Models;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Agenda.Data.Services;
 
 class ContatoService
 {
     private static readonly string DatabaseDir = "./Data/database.csv";
-    private static readonly string DelimitadorCSV = ";";
+    private static readonly char DelimitadorCSV = ';';
+    private static readonly CsvConfiguration CsvConfig =
+        new() { Delimiter = ";", CultureInfo = CultureInfo.InvariantCulture };
 
     public ContatoService()
     {
@@ -19,6 +24,11 @@ class ContatoService
         if (!bancoDeDados.Exists)
         {
             bancoDeDados.Create().Close();
+            using (var writer = new StreamWriter(DatabaseDir))
+            using (var csv = new CsvWriter(writer, CsvConfig))
+            {
+                csv.WriteHeader<Contato>();
+            }
         }
     }
 
@@ -46,35 +56,16 @@ class ContatoService
 
     public List<Contato> ListarContatos()
     {
-        /// ler o arquivo database.csv
-        var contatos = new List<Contato>();
-        using (var reader = new StreamReader(DatabaseDir))
-            while (!reader.EndOfStream)
-            {
-                var line = reader.ReadLine();
-                if (line == null)
-                    continue;
-                var dados = line.Split(DelimitadorCSV);
-                var contato = new Contato
-                {
-                    Id = int.Parse(dados[0]),
-                    Nome = dados[1],
-                    DDD = dados[2],
-                    Numero = dados[3],
-                    Email = dados[4],
-                };
-                contatos.Add(contato);
-            }
-        return contatos;
+        using var reader = new StreamReader(DatabaseDir);
+        using var csv = new CsvReader(reader, CsvConfig);
+        return csv.GetRecords<Contato>().ToList();
     }
 
     public void SalvarContatos(List<Contato> contatos)
     {
         using var writer = new StreamWriter(DatabaseDir);
-        foreach (var c in contatos)
-            writer.WriteLine(
-                $"{c.Id}{DelimitadorCSV}{c.Nome}{DelimitadorCSV}{c.DDD}{DelimitadorCSV}{c.Numero}{DelimitadorCSV}{c.Email}"
-            );
+        using var csv = new CsvWriter(writer, CsvConfig);
+        csv.WriteRecords(contatos);
     }
 
     public List<Contato> FiltrarContatos(string filtro)
